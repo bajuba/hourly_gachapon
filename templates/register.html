@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class='container'>
+    <div class='panel panel-primary'>
+        <div class='panel-heading'><h1>Blogz Registration</h1></div>
+        <div class='panel-body'>
+            <form class='form-horizontal' action="/register" method="post">
+                <div class='form-group row'>
+                    <div class="col-sm-3"></div>
+                    <div class='col-sm-6'>
+                        <label for="email">Email</label>
+                        <input class="form-control" name="email" type="email" value="{{ email }}">
+                    </div>
+                    <div class='col-sm-3'></div>
+                </div>
+                <div class='form-group row'>
+                    <div class="col-sm-3"></div>
+                    <div class='col-sm-6'>
+                        <label for="password">Password</label>
+                        <input class="form-control" name="password" type="password">
+                    </div>
+                    <div class='col-sm-3'></div>
+                </div>
+                <div class='form-group row'>
+                    <div class="col-sm-3"></div>
+                    <div class='col-sm-6'>
+                        <label for="verify">Verify Password</label>
+                        <input class="form-control" name="verify" type="password">
+                    </div>
+                    <div class='col-sm-3'></div>
+                </div>
+        </div>
+        <div class='panel-footer'>
+            <div class='text-right'>
+                    <input type="submit" value="Cancel" class="btn btn-danger" formaction='/'>
+                    <input type="submit" value="Register" class="btn btn-success">
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    
+    
+    
+    
+</form>
+
+{% endblock %}

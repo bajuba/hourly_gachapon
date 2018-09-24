@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class='container'>
+        <div class='page-header'>
+            <h1><a href="/index">Blogz</a> <small>Blog Posts</small></h1>
+        </div>
+    </div>
+    
+    
+    <br>
+    <div class='container'>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-7">
+                {% if blogs|length > 0 %}
+                    {% for blog in blogs %}
+                        <h3><a href="/blog?blog-id={{blog.id}}">{{blog.title}}</a></h3>
+                        <blockquote>
+                            {{blog.body}}
+                            <footer class='blockquote-footer'>by <a href="/user?id={{blog.owner.id}}">{{blog.owner.email}}</a> {{blog.pubdate}}</footer>
+                        </blockquote>
+                        <hr>
+                        <br>
+                    {% endfor %}
+                {% else %}
+                    <div class='text-large'> Looks like there aren't any posts yet!</div>
+                {% endif %}
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+    
+    
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class='container'>
+        <div class='page-header'>
+            <h3>{{blog.title}} 
+                {% if session['email'] == user.email %}
+                    <sup><a href="/new_post?id={{blog.id}}"><i class='glyphicon glyphicon-pencil'></i><span class="sr-only">Edit</span></a></sup>
+                {% endif %}
+                <small>by <a href="/user?id={{blog.owner.id}}">{{blog.owner.email}}</a> on {{blog.pubdate}}</small></h3>
+        </div>
+    </div>
+    <div class='container'>
+        <div class='row'>
+            <div class='col-sm-1'></div>
+            <div class='col-sm-8'>
+                <div class='panel text-large'>{{blog.body}}</div>
+            </div>
+            <div class='col-sm-3'></div>
+        </div>
+    </div>
+
+{% endblock %}

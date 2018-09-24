@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class='container'>
+        <div class='page-header'>
+            <h3><a href='/user?id={{user.id}}'>{{user.email}}'s</a> <small>Posts</small></h3>
+        </div>
+    </div>
+    <div class='container'>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-7">
+                {% if blogs|length > 0 %}
+                    {% for blog in blogs %}
+                        <h4><a href="/blog?blog-id={{blog.id}}">{{blog.title}}</a>
+                            {% if session['email'] == user.email %}
+                                <sup><a href="/new_post?id={{blog.id}}"><i class='glyphicon glyphicon-pencil'></i><span class="sr-only">Edit</span></a></sup>
+                            {% endif %}
+                            </h4>
+                        <blockquote>
+                            {{blog.body}}
+                            <footer class='blockquote-footer'>
+                                {{blog.pubdate}}
+                            </footer>
+                        </blockquote>
+                        
+                        <hr>
+                        <br>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-large">{{user.email}} doesn't have any posts yet!</div>
+                {% endif %}
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+    
+{% endblock %}

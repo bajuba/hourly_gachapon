@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        <style>
+            .Error{color:firebrick}
+            .text-large{font-size:150%}
+            .text-med{font-size:120%}
+            .disabled-link{
+                color:gray;
+                pointer-events: none;
+            }
+        </style>
+        {% if session['bootstrap'] == True %}
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        {% endif %}
+    </head>
+<body>
+    {% if 'email' in session %}
+    <div class="container">
+        <div class='row'>
+        <form class='form-inline' action='/bootstrap'>
+            <nav class='col-sm-5 text-med'>
+                <a href="./logout">log out</a> |
+                <a href="./">Home</a> | 
+                <a href="./users">Contributors</a> | 
+                <a href="./new_post">New Post</a>
+            </nav>
+            
+            <div class='col-sm-2'></div>
+            <input class='form-control col-sm-2' type='submit' value='Toggle Bootstrap'>
+        </form>
+        
+        <div class='text-right col-sm-3'>Logged in as <a href="/user?id={{session['id']}}">{{session['email']}}</a></div>
+    </div>
+    </div>
+    {% else %}
+        <form action='/bootstrap'>
+            <input class='form-control' type='submit' value='Toggle Bootstrap'>
+        </form>
+    {% endif %}
+    
+    {% block content %}
+    {% endblock %}
+    <div class='container text-center'>
+        {% if page %}
+            
+            {% if prev_url %}
+                <a class='btn btn-circle' href='{{prev_url}}'><i class="glyphicon glyphicon-chevron-left"></i><span class="sr-only">&ltNewer Posts</span></a>
+            {% else %}
+                <a class='btn btn-circle disabled-link' href='{{prev_url}}'><i class="glyphicon glyphicon-chevron-left"></i><span class="sr-only">&ltNewer Posts</span></a>
+            {% endif %}
+            {{page}}
+            {% if next_url %}
+                <a class='btn btn-circle' href='{{next_url}}'><i class="glyphicon glyphicon-chevron-right"></i><span class="sr-only">Older Posts&gt</span></a>
+            {% else %}
+                <a class='btn btn-circle disabled-link' href='{{next_url}}'><i class="glyphicon glyphicon-chevron-right"></i><span class="sr-only">Older Posts&gt</span></a>
+            {% endif %}
+
+        {% endif %}
+    </div>
+    {% with messages=get_flashed_messages(with_categories=True) %}
+        {% for category,message in messages %}
+            
+            <div class='row'>
+                <div class='col-sm-3'></div>
+                <div class='col-sm-6'>
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only {{category}}">Error:</span>
+                        {{message}}
+                    </div>
+                </div>
+                <div class='col-sm-3'></div>
+            </div>
+        {% endfor %}
+    {% endwith %}
+</body>
+</html>

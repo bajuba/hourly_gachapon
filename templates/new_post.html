@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class='container'>
+    <div class='panel panel-info'>
+        {% if not editing %}
+        <div class='panel-heading'><h1>New Blog Post</h1></div>
+        {% else %}
+        <div class='panel-heading'><h1>Edit Blog Post</h1></div>
+        {% endif %}
+        <div class='panel-body'>
+            <form action="/new_post" method="post">
+                <div class="form-group row">
+                    <div class='col-sm-1'></div>
+                    <div class='col-sm-6'>
+                        <label for='title'>Title</label>
+                        <input name="title" class="form-control" type="text" value="{{title}}">
+                    </div>
+                    <div class='col-sm-5'></div>
+                </div>
+                <div class="form-group row">
+                    <div class='col-sm-1'></div>
+                    <div class='col-sm-9'>
+                        <label for='body'>Content</label>
+                        <textarea class='form-control' name="body" rows='7'>{{body}}</textarea>
+                    </div>
+                    <div class='col-sm-2'></div>
+                </div>
+        </div>
+        <div class='panel-footer'>
+            <div class='text-right'>
+                <input name='cancel' type="submit" value="Cancel" class="btn btn-danger" formaction={{back}}>
+                {% if not editing %}
+                <input type="submit" value="Post" class="btn btn-success">
+                {% else %}
+                
+                <input type="hidden" name='id' value="{{id}}">
+                <input type="hidden" name='editing' value="{{editing}}">
+                <input type="submit" value="Update" class="btn btn-success">
+                {% endif %}
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
