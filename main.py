@@ -5,6 +5,7 @@ from app import app
 from libs.hashutils import make_pw_hash,check_pw_hash
 
 
+
 @app.before_request
 def require_login():
     if 'bootstrap' not in session:

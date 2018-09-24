@@ -1,5 +1,8 @@
-# Byte-compiled / optimized / DLL files
+#Custom
 libs/__pycache__
+password.py
+
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
